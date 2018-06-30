@@ -1,0 +1,11 @@
+/public/hot
+/public/storage
+/.idea
+/.vscode
+/.vagrant
+/bootstrap/cache
+npm-debug.log
+yarn-error.log
+.env
+node_modules
+vendor

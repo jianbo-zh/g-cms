@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+/*!
+ * CoreUI Icons - Open Source Icons
+ * @version v0.1.1
+ * @link https://coreui.io/icons
+ * Copyright (c) 2018 creativeLabs Łukasz Holeczek
+ * Licensed under MIT (https://coreui.io/icons/license)
+ */
+
+@font-face {
+  font-family: 'CoreUI-Icons-Linear';
+  src: url(/fonts/vendor/@coreui/icons/CoreUI-Icons-Linear.eot?2f3e65491542eb5a00012874dc003724);
+  src: url(/fonts/vendor/@coreui/icons/CoreUI-Icons-Linear.eot?2f3e65491542eb5a00012874dc003724) format("embedded-opentype"), url(/fonts/vendor/@coreui/icons/CoreUI-Icons-Linear.ttf?401a082edaf3bc67de0000bf17ba308f) format("truetype"), url(/fonts/vendor/@coreui/icons/CoreUI-Icons-Linear.woff?ea13b16754fa05ba96498b7eff633daf) format("woff"), url(/fonts/vendor/@coreui/icons/CoreUI-Icons-Linear.svg?5a0baead5705a97734a240d9928a3927) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="cui-"],
+[class*=" cui-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'CoreUI-Icons-Linear' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cui-basket-loaded:before {
+  content: "\E900";
+}
+
+.cui-bell:before {
+  content: "\E901";
+}
+
+.cui-calculator:before {
+  content: "\E902";
+}
+
+.cui-calendar:before {
+  content: "\E903";
+}
+
+.cui-camera:before {
+  content: "\E904";
+}
+
+.cui-chart:before {
+  content: "\E905";
+}
+
+.cui-cloud-download:before {
+  content: "\E906";
+}
+
+.cui-cursor:before {
+  content: "\E907";
+}
+
+.cui-cursor-move:before {
+  content: "\E908";
+}
+
+.cui-drop:before {
+  content: "\E909";
+}
+
+.cui-energy:before {
+  content: "\E90A";
+}
+
+.cui-envelope-letter:before {
+  content: "\E90B";
+}
+
+.cui-equalizer:before {
+  content: "\E90C";
+}
+
+.cui-globe:before {
+  content: "\E90D";
+}
+
+.cui-graph:before {
+  content: "\E90E";
+}
+
+.cui-home:before {
+  content: "\E90F";
+}
+
+.cui-layers:before {
+  content: "\E910";
+}
+
+.cui-list:before {
+  content: "\E911";
+}
+
+.cui-location-pin:before {
+  content: "\E912";
+}
+
+.cui-map:before {
+  content: "\E913";
+}
+
+.cui-note:before {
+  content: "\E914";
+}
+
+.cui-options:before {
+  content: "\E915";
+}
+
+.cui-pencil:before {
+  content: "\E916";
+}
+
+.cui-people:before {
+  content: "\E917";
+}
+
+.cui-pie-chart:before {
+  content: "\E918";
+}
+
+.cui-puzzle:before {
+  content: "\E919";
+}
+
+.cui-screen-desktop:before {
+  content: "\E91A";
+}
+
+.cui-screen-smartphone:before {
+  content: "\E91B";
+}
+
+.cui-settings:before {
+  content: "\E91C";
+}
+
+.cui-social-facebook:before {
+  content: "\E91D";
+}
+
+.cui-social-skype:before {
+  content: "\E91E";
+}
+
+.cui-social-twitter:before {
+  content: "\E91F";
+}
+
+.cui-speech:before {
+  content: "\E920";
+}
+
+.cui-speedometer:before {
+  content: "\E921";
+}
+
+.cui-star:before {
+  content: "\E922";
+}
+
+.cui-user:before {
+  content: "\E923";
+}
+
+.cui-user-female:before {
+  content: "\E924";
+}
+
+.cui-user-follow:before {
+  content: "\E925";
+}
+
+.cui-user-unfollow:before {
+  content: "\E926";
+}
+

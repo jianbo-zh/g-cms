@@ -1,0 +1,46 @@
+/*
+ * tinymce all plugins
+ */
+require('tinymce/plugins/advlist/plugin.min.js');
+require('tinymce/plugins/anchor/plugin.min.js');
+require('tinymce/plugins/autolink/plugin.min.js');
+require('tinymce/plugins/autoresize/plugin.min.js');
+require('tinymce/plugins/autosave/plugin.min.js');
+require('tinymce/plugins/bbcode/plugin.min.js');
+require('tinymce/plugins/charmap/plugin.min.js');
+require('tinymce/plugins/code/plugin.min.js');
+require('tinymce/plugins/codesample/plugin.min.js');
+require('tinymce/plugins/colorpicker/plugin.min.js');
+require('tinymce/plugins/contextmenu/plugin.min.js');
+require('tinymce/plugins/directionality/plugin.min.js');
+require('tinymce/plugins/emoticons/plugin.min.js');
+require('tinymce/plugins/fullpage/plugin.min.js');
+require('tinymce/plugins/fullscreen/plugin.min.js');
+require('tinymce/plugins/help/plugin.min.js');
+require('tinymce/plugins/hr/plugin.min.js');
+require('tinymce/plugins/image/plugin.min.js');
+require('tinymce/plugins/imagetools/plugin.min.js');
+// require('tinymce/plugins/importcss/plugin.min.js');
+require('tinymce/plugins/insertdatetime/plugin.min.js');
+require('tinymce/plugins/legacyoutput/plugin.min.js');
+require('tinymce/plugins/link/plugin.min.js');
+require('tinymce/plugins/lists/plugin.min.js');
+require('tinymce/plugins/media/plugin.min.js');
+require('tinymce/plugins/nonbreaking/plugin.min.js');
+require('tinymce/plugins/noneditable/plugin.min.js');
+require('tinymce/plugins/pagebreak/plugin.min.js');
+require('tinymce/plugins/paste/plugin.min.js');
+require('tinymce/plugins/preview/plugin.min.js');
+require('tinymce/plugins/print/plugin.min.js');
+require('tinymce/plugins/save/plugin.min.js');
+require('tinymce/plugins/searchreplace/plugin.min.js');
+require('tinymce/plugins/spellchecker/plugin.min.js');
+require('tinymce/plugins/tabfocus/plugin.min.js');
+require('tinymce/plugins/table/plugin.min.js');
+require('tinymce/plugins/template/plugin.min.js');
+require('tinymce/plugins/textcolor/plugin.min.js');
+require('tinymce/plugins/textpattern/plugin.min.js');
+// require('tinymce/plugins/toc/plugin.min.js');
+require('tinymce/plugins/visualblocks/plugin.min.js');
+require('tinymce/plugins/visualchars/plugin.min.js');
+require('tinymce/plugins/wordcount/plugin.min.js');
