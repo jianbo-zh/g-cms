@@ -77,8 +77,8 @@ class MessageDefinitionRepository extends Repository
      * @return bool|mixed 是否成功，成功则返回更新后的消息，失败返回false
      * @throws Exception
      */
-    public function updateDefinition(int $definitionId, int $stateId=null, string $receiverType=null,
-                                     string $receiverValue=null, string $content=null)
+    public function updateDefinition(int $definitionId, ?int $stateId=null, ?string $receiverType=null,
+                                     ?string $receiverValue=null, ?string $content=null)
     {
         if(is_null($stateId) && is_null($receiverType) && is_null($receiverValue) && is_null($content)){
             throw new Exception('更新数据不能都为空！');

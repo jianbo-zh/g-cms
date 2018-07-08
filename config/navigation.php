@@ -47,23 +47,28 @@ return [
                 '事物管理' =>[
                     '结构定义' => [
                         'icon' => 'icon-people',
-                        'action' => Controllers\App\AppController::class.'@indexAppRoles',
+                        'action' => Controllers\Thing\FieldController::class.'@indexThingFields',
                         'url' => '/app/[APP_ID]/thing/[THING_ID]/fields'
                     ],
                     '状态定义' => [
                         'icon' => 'icon-user',
-                        'action' => Controllers\App\AppController::class.'@indexAppUsers',
+                        'action' => Controllers\Thing\StateController::class.'@indexThingStates',
                         'url' => '/app/[APP_ID]/thing/[THING_ID]/states'
                     ],
                     '操作定义' => [
                         'icon' => 'icon-grid',
-                        'action' => Controllers\Thing\ThingController::class.'@indexPlatformThings',
+                        'action' => Controllers\Thing\OperationController::class.'@indexThingOperations',
                         'url' => '/app/[APP_ID]/thing/[THING_ID]/operations'
                     ],
-                    '消息管理' => [
-                        'icon' => 'icon-grid',
-                        'action' => Controllers\Thing\ThingController::class.'@indexPlatformThings',
+                    '消息定义' => [
+                        'icon' => 'icon-bubble',
+                        'action' => Controllers\Thing\MessageController::class.'@indexThingMessages',
                         'url' => '/app/[APP_ID]/thing/[THING_ID]/messages'
+                    ],
+                    '统计定义' => [
+                        'icon' => 'icon-chart',
+                        'action' => Controllers\Thing\StatsController::class.'@indexThingStatsItems',
+                        'url' => '/app/[APP_ID]/thing/[THING_ID]/statsItems'
                     ],
                 ],
             ],

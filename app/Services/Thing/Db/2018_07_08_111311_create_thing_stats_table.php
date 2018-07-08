@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatsTable extends Migration
+class CreateThingStatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateStatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stats', function (Blueprint $table) {
+        Schema::create('thing_stats', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('app_id')->comment('应用编号');
-            $table->string('name')->comment('名称');
+            $table->integer('app_id')->comment('应用编号');
+            $table->json('show_config')->comment('显示配置');
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE `stats` COMMENT '统计表'");
+        DB::statement("ALTER TABLE `thing_stats` COMMENT '事物统计集合表'");
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateStatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stats');
+        Schema::dropIfExists('thing_stats');
     }
 }

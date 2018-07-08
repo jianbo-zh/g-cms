@@ -303,6 +303,28 @@ Route::middleware('auth')->namespace('Thing')->group(function(){
         ->name('editThingMessage')
         ->middleware('perm:appDevelop');
 
+    /*
+     * 事物统计-列表
+     */
+    Route::get('/app/{appId}/thing/{thingId}/statsItems', 'StatsController@indexThingStatsItems')
+        ->name('indexThingStatsItems')
+        ->middleware('perm:appDevelop');
+
+    /*
+     * 事物统计-新增
+     */
+    Route::get('/app/{appId}/thing/{thingId}/statsItem/create', 'StatsController@createThingStatsItem')
+        ->name('createThingStatsItem')
+        ->middleware('perm:appDevelop');
+
+    /*
+     * 事物统计-编辑
+     */
+    Route::get('/app/{appId}/thing/{thingId}/statsItem/{stateItemId}/edit', 'StatsController@editThingStatsItem')
+        ->name('editThingStatsItem')
+        ->middleware('perm:appDevelop');
+
+
 });
 
 /*

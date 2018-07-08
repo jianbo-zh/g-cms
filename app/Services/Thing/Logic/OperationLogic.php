@@ -97,8 +97,8 @@ class OperationLogic extends Logic
      * @return array 成功返回更新后的操作信息
      * @throws \Exception
      */
-    public function updateOperation(int $operationId, string $name=null, string $operationType=null,
-                                    string $operationForm=null, array $fields=null)
+    public function updateOperation(int $operationId, ?string $name=null, ?string $operationType=null,
+                                    ?string $operationForm=null, ?array $fields=null)
     {
         try{
             DB::beginTransaction();

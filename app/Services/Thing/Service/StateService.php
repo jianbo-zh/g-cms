@@ -84,7 +84,7 @@ class StateService extends Service
      * @throws Exception
      * @throws \Exception
      */
-    public function updateState(string $authCode, int $stateId, string $name=null, array $conditions=null)
+    public function updateState(string $authCode, int $stateId, ?string $name=null, ?array $conditions=null)
     {
 
         if(is_null($name) && is_null($conditions)){

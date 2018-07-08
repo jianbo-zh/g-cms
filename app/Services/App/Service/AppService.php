@@ -110,8 +110,8 @@ class AppService extends Service
      * @param bool|null $isEnable 是否可用
      * @return array|false 成功则返回更新后的应用，失败false
      */
-    public function updateApp(string $authCode, int $appId, int $userId=null, string $name=null, string $dec=null,
-                              bool $isEnable=null)
+    public function updateApp(string $authCode, int $appId, ?int $userId=null, ?string $name=null, ?string $dec=null,
+                              ?bool $isEnable=null)
     {
         $appRepo = AppRepository::instance();
 

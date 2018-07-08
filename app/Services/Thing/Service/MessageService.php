@@ -80,8 +80,8 @@ class MessageService extends Service
      * @return bool|mixed 成功则返回更新的消息定义，失败返回false
      * @throws \App\Services\_Base\Exception
      */
-    public function updateDefinition(string $authCode, int $definitionId, int $stateId=null, string $receiverType=null,
-                                     string $receiverValue=null, string $content=null)
+    public function updateDefinition(string $authCode, int $definitionId, ?int $stateId=null,
+                                     ?string $receiverType=null, ?string $receiverValue=null, ?string $content=null)
     {
         return $this->definitionRepo->updateDefinition($definitionId, $stateId, $receiverType, $receiverValue,
             $content);

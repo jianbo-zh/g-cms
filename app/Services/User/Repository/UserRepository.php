@@ -66,10 +66,10 @@ class UserRepository extends Repository
      * @return bool|array 成功则返回更新后的用户，失败返回false
      * @throws Exception
      */
-    public function updateUser(int $userId, string $nickname=null, string $phone=null,
-                               string $email=null, bool $isEnable=null)
+    public function updateUser(int $userId, ?string $nickname=null, ?string $phone=null, ?string $email=null,
+                               ?bool $isEnable=null)
     {
-        if(is_null($userType) && is_null($nickname) && is_null($phone) && is_null($email) && is_null($isEnable)){
+        if(is_null($nickname) && is_null($phone) && is_null($email) && is_null($isEnable)){
             throw new Exception('更新参数不能都为空！');
         }
 
@@ -247,7 +247,7 @@ class UserRepository extends Repository
      * @param int|null $limit 返回数量
      * @return array 用户集
      */
-    public function getUsers(array $condition=null, array $fields=null, int $offset=0, int $limit=null)
+    public function getUsers(?array $condition=null, ?array $fields=null, int $offset=0, ?int $limit=null)
     {
         $users = UserModel::when(!empty($condition), function (Builder $query) use ($condition){
                 if(!empty($condition['username'])){
@@ -262,7 +262,7 @@ class UserRepository extends Repository
                 }
                 return $query;
             })
-            ->when(is_array($fields), function (Builder $query) use ($fields){
+            ->when($fields, function (Builder $query) use ($fields){
                 return $query->select($fields);
             })
             ->when($limit > 0, function (Builder $query) use ($offset, $limit){
@@ -283,11 +283,12 @@ class UserRepository extends Repository
      * @param int|null $limit 返回数量
      * @return array 用户集
      */
-    public function getUsersOfApp(int $appId, array $condition=null, array $fields=null, int $offset=0, int $limit=0)
+    public function getUsersOfApp(int $appId, ?array $condition=null, ?array $fields=null, int $offset=0,
+                                  ?int $limit=null)
     {
         $users = UserModel::where('user_type', UserModel::USER_TYPE_APP_CONTENT)
             ->where('app_id', $appId)
-            ->when(is_array($condition), function (Builder $query) use ($condition){
+            ->when($condition, function (Builder $query) use ($condition){
                 if(!empty($condition['username'])){
                     $query->where('username', $condition['username']);
                 }
@@ -297,7 +298,7 @@ class UserRepository extends Repository
                 }
                 return $query;
             })
-            ->when(is_array($fields), function (Builder $query) use ($fields){
+            ->when($fields, function (Builder $query) use ($fields){
                 return $query->select($fields);
             })
             ->when($limit > 0, function (Builder $query) use ($offset, $limit){

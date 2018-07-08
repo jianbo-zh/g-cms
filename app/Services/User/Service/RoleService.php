@@ -129,8 +129,8 @@ class RoleService extends Service
      * @return array|bool 成功则返回最新的角色信息，失败返回false
      * @throws Exception
      */
-    public function updatePlatformRole(string $authCode, int $roleId, string $name=null, string $description=null,
-                                       bool $isEnable=null, array $perms=null)
+    public function updatePlatformRole(string $authCode, int $roleId, ?string $name=null, ?string $description=null,
+                                       ?bool $isEnable=null, ?array $perms=null)
     {
         return $this->roleRepo->updatePlatformRole($roleId, $name, $description, $isEnable, $perms);
     }
@@ -148,8 +148,8 @@ class RoleService extends Service
      * @return array|bool 成功则返回最新的角色信息，失败返回false
      * @throws Exception
      */
-    public function updateAppRole(string $authCode, int $appId, int $roleId, string $name=null,
-                                  string $description=null, bool $isEnable=null, array $perms=null)
+    public function updateAppRole(string $authCode, int $appId, int $roleId, ?string $name=null,
+                                  ?string $description=null, ?bool $isEnable=null, ?array $perms=null)
     {
         return $this->roleRepo->updateAppRole($appId, $roleId, $name, $description, $isEnable, $perms);
     }

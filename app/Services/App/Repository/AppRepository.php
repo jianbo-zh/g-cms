@@ -65,7 +65,7 @@ class AppRepository extends Repository
      * @param int $limit 返回数量
      * @return array 应用列表
      */
-    public function getApps(array $fields=null, array $orderBy=[], int $offset=0, int $limit=0)
+    public function getApps(array $fields=[], array $orderBy=[], int $offset=0, int $limit=0)
     {
         return $this->normalizeReturn($this->commonGetApps([], $fields, $orderBy, $offset, $limit));
     }
@@ -74,13 +74,13 @@ class AppRepository extends Repository
      * 获取应用数据
      *
      * @param array|null 查询条件
-     * @param array|null $fields 返回字段：["id", "name", "description", "state", "created_at", "updated_at"]
+     * @param array $fields 返回字段：["id", "name", "description", "state", "created_at", "updated_at"]
      * @param array $orderBy 排序依据：["id", "asc|desc"]
      * @param int $offset 偏移数量
      * @param int $limit 返回数量
      * @return array 应用列表
      */
-    public function getAppsByCondition(array $condition=null, array $fields=null, array $orderBy=[], int $offset=0,
+    public function getAppsByCondition(array $condition=[], array $fields=[], array $orderBy=[], int $offset=0,
                                        int $limit=0)
     {
         return $this->normalizeReturn($this->commonGetApps($condition, $fields, $orderBy, $offset, $limit));
@@ -120,7 +120,7 @@ class AppRepository extends Repository
      * @param bool|null $isEnable 是否可用
      * @return array|false 成功则返回更新后的应用，失败false
      */
-    public function updateApp(int $appId, int $userId=null, string $name=null, string $dec=null, bool $isEnable=null)
+    public function updateApp(int $appId, ?int $userId=null, ?string $name=null, ?string $dec=null, ?bool $isEnable=null)
     {
         $app = AppModel::findOrFail($appId);
         if(!is_null($userId)){

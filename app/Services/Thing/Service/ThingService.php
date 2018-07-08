@@ -353,7 +353,7 @@ class ThingService extends Service
      * @param int $limit 返回数量
      * @return array 事物列表
      */
-    public function getThings(string $authCode, int $appId, array $condition=null, int $offset=0, int $limit=20)
+    public function getThings(string $authCode, int $appId, array $condition=[], int $offset=0, int $limit=20)
     {
         return $this->thingRepo->getThings($appId, $condition, ['id', 'app_id', 'name', 'description', 'created_at',
             'updated_at'], ['id', 'asc'], $offset, $limit);
@@ -368,8 +368,9 @@ class ThingService extends Service
      * @param string|null $name 名称
      * @param string|null $dec 描述
      * @return array|bool 成功则返回更新后的事物，失败返回false
+     * @throws Exception
      */
-    public function updateThing(string $authCode, int $thingId, string $name=null, string $dec=null)
+    public function updateThing(string $authCode, int $thingId, ?string $name=null, ?string $dec=null)
     {
         $result = $this->thingRepo->updateThing($thingId, $name, $dec);
 

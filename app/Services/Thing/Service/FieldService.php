@@ -85,9 +85,9 @@ class FieldService extends Service
      * @return mixed 新增的字段信息
      * @throws \App\Services\_Base\Exception
      */
-    public function updateField(string $authCode, int $fieldId, string $name=null, string $comment=null,
-                                string $storageType=null, string $showType=null, array $showOption=null,
-                                bool $isList=null, bool $isSearch=null)
+    public function updateField(string $authCode, int $fieldId, ?string $name=null, ?string $comment=null,
+                                ?string $storageType=null, ?string $showType=null, ?array $showOption=null,
+                                ?bool $isList=null, ?bool $isSearch=null)
     {
         return $this->fieldRepo->updateField($fieldId, $name, $comment, $storageType, $showType, $showOption,
             $isList, $isSearch);

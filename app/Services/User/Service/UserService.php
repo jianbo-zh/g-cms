@@ -162,8 +162,8 @@ class UserService extends Service
      * @return bool|array 成功则返回更新后的用户，失败返回false
      * @throws \App\Services\_Base\Exception
      */
-    public function updateUser(string $authCode, int $userId, string $nickname=null, string $phone=null,
-                               string $email=null, bool $isEnable=null)
+    public function updateUser(string $authCode, int $userId, ?string $nickname=null, ?string $phone=null,
+                               ?string $email=null, ?bool $isEnable=null)
     {
         $user = $this->userRepo->updateUser($userId, $nickname, $phone, $email, $isEnable);
 
@@ -285,7 +285,7 @@ class UserService extends Service
      * @param int $limit 偏移数量
      * @return array 用户集
      */
-    public function getUsersBelongToRole(string $authCode, int $roleId, array $fields=null, int $offset=0, int $limit=20)
+    public function getUsersBelongToRole(string $authCode, int $roleId, ?array $fields=null, int $offset=0, int $limit=20)
     {
         $users = $this->roleRepo->getUsersBelongToRole($roleId, $fields, $offset, $limit);
 
@@ -342,9 +342,9 @@ class UserService extends Service
      * @param int $limit 返回数量
      * @return array 用户集
      */
-    public function getUsers(string $authCode, array $condition=null, int $offset=0, int $limit=20)
+    public function getUsers(string $authCode, ?array $condition=null, int $offset=0, int $limit=20)
     {
-        $users = $this->userRepo->getUsers($condition, ['*'], $offset, $limit);
+        $users = $this->userRepo->getUsers($condition, null, $offset, $limit);
 
         return $users;
     }
@@ -373,9 +373,9 @@ class UserService extends Service
      * @param int $limit 返回数量
      * @return array 用户集
      */
-    public function getAppUsers(string $authCode, int $appId, array $condition=null, int $offset=0, int $limit=0)
+    public function getAppUsers(string $authCode, int $appId, ?array $condition=null, int $offset=0, ?int $limit=null)
     {
-        $users = $this->userRepo->getUsersOfApp($appId, $condition, ['*'], $offset, $limit);
+        $users = $this->userRepo->getUsersOfApp($appId, $condition, null, $offset, $limit);
 
         return $users;
     }

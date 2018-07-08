@@ -92,7 +92,7 @@ class StateLogic extends Logic
      * @return array 成功返回更新后的状态信息
      * @throws \Exception
      */
-    public function updateState(int $stateId, string $name=null, array $conditions=null)
+    public function updateState(int $stateId, ?string $name=null, ?array $conditions=null)
     {
         try{
             DB::beginTransaction();

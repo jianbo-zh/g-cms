@@ -177,8 +177,8 @@ class StateRepository extends Repository
      * @return array|false 成功返回新状态条件，失败返回false
      * @throws Exception
      */
-    public function updateStateCondition(int $conditionId, int $stateId=null, int $fieldId=null, string $symbol=null,
-                                         $value=null)
+    public function updateStateCondition(int $conditionId, ?int $stateId=null, ?int $fieldId=null, ?string $symbol=null,
+                                         ?$value=null)
     {
         if(is_null($stateId) && is_null($fieldId) && is_null($symbol) && is_null($value)){
             throw new Exception('更新字段不能都为空！');
@@ -267,7 +267,7 @@ class StateRepository extends Repository
      * @return bool|null 是否成功
      * @throws \Exception
      */
-    public function unbindStateAndOperation(int $stateId=null, int $operationId=null)
+    public function unbindStateAndOperation(?int $stateId=null, ?int $operationId=null)
     {
         if(is_null($stateId) && is_null($operationId)){
             throw new Exception('状态和操作不能都为空！');

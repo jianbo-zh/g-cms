@@ -38,6 +38,7 @@ class FieldModel extends Model
     const STORAGE_VARCHAR_255      = 'varchar255';
     const STORAGE_VARCHAR_1000     = 'varchar1000';
     const STORAGE_DATE             = 'date';
+    const STORAGE_DATETIME         = 'datetime';
     const STORAGE_TIMESTAMP        = 'timestamp';
     const STORAGE_BLOB             = 'blob';
     const STORAGE_TEXT             = 'text';
@@ -59,6 +60,7 @@ class FieldModel extends Model
         self::STORAGE_VARCHAR_255      => 'VARCHAR(255)',
         self::STORAGE_VARCHAR_1000     => 'VARCHAR(1000)',
         self::STORAGE_DATE             => 'DATE',
+        self::STORAGE_DATETIME         => 'DATETIME',
         self::STORAGE_TIMESTAMP        => 'TIMESTAMP',
         self::STORAGE_BLOB             => 'BLOB',
         self::STORAGE_TEXT             => 'TEXT',

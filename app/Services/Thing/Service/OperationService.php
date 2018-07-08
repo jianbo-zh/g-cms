@@ -134,8 +134,8 @@ class OperationService extends Service
      * @return array 更新后的操作
      * @throws \Exception
      */
-    public function updateOperation(string $authCode, int $operationId, string $name=null, string $operationType=null,
-                                    string $operationForm=null, array $operationFields=null)
+    public function updateOperation(string $authCode, int $operationId, ?string $name=null, ?string $operationType=null,
+                                    ?string $operationForm=null, ?array $operationFields=null)
     {
         $operation = $this->operationLogic->updateOperation($operationId, $name, $operationType, $operationForm,
             $operationFields);

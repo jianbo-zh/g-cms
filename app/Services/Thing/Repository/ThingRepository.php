@@ -38,9 +38,13 @@ class ThingRepository extends Repository
      * @param string|null $name 名称
      * @param string|null $dec 描述
      * @return bool|array 成功则返回更新后的事物信息，失败返回false
+     * @throws Exception
      */
-    public function updateThing(int $thingId, string $name=null, string $dec=null)
+    public function updateThing(int $thingId, ?string $name=null, ?string $dec=null)
     {
+        if(is_null($name) || is_null($dec)){
+            throw new Exception('更新事物不能都为空！');
+        }
         $thing = ThingModel::findOrFail($thingId);
         if(!is_null($name)){
             $thing->name = $name;
@@ -89,14 +93,14 @@ class ThingRepository extends Repository
      *
      * @param int $appId 应用编号
      * @param array $condition 查询条件
-     * @param array|null 返回字段 ['id', 'app_id', 'name', 'description', 'created_at', 'updated_at']
+     * @param array 返回字段 ['id', 'app_id', 'name', 'description', 'created_at', 'updated_at']
      * @param array $orderBy 排序依据：["id", "asc|desc"]
      * @param int $offset 偏移数量
      * @param int|null $limit 返回数量
      * @return array 事物列表数组
      */
-    public function getThings(int $appId, array $condition=null, array $fields=null, array $orderBy=[],
-                              int $offset=0, int $limit=null)
+    public function getThings(int $appId, ?array $condition=null, ?array $fields=null, ?array $orderBy=null,
+                              int $offset=0, ?int $limit=null)
     {
         $things = ThingModel::where('app_id', $appId)
             ->when($condition, function (Builder $query) use ($condition){

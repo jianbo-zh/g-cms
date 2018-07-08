@@ -10,7 +10,7 @@ use App\Services\Thing\Service\OperationService;
 use Illuminate\Support\Facades\Route;
 
 /**
- * 事物字段相关接口
+ * 事物操作相关接口
  *
  * Class ThingApiController
  * @package App\Http\Controllers\Api

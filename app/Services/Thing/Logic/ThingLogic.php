@@ -141,7 +141,8 @@ class ThingLogic extends Logic
      * @return array|bool 是否成功，成功则返回更新后的内容，失败返回false
      * @throws \Exception
      */
-    public function updateThingContent(int $thingId, int $operationId, int $contentId, array $contentData, array $extraData)
+    public function updateThingContent(int $thingId, int $operationId, int $contentId, array $contentData,
+                                       array $extraData)
     {
         try{
             DB::beginTransaction();

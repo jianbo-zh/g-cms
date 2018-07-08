@@ -116,8 +116,9 @@ class FieldRepository extends Repository
      * @return mixed 新增的字段信息
      * @throws Exception
      */
-    public function updateField(int $fieldId, string $name=null, string $comment=null, string $storageType=null,
-                                string $showType=null, array $showOption=null, bool $isList=null, bool $isSearch=null)
+    public function updateField(int $fieldId, ?string $name=null, ?string $comment=null, ?string $storageType=null,
+                                ?string $showType=null, ?array $showOption=null, ?bool $isList=null,
+                                ?bool $isSearch=null)
     {
         if(is_null($name) && is_null($storageType) && is_null($comment) && is_null($isList) && is_null($isSearch) &&
             is_null($showType) && is_null($showOption)){

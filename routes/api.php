@@ -367,6 +367,35 @@ Route::middleware('auth:api')->namespace('Api')->group(function (){
             ->where('messageId', '[1-9][0-9]*')
             ->name('destroyThingMessage')
             ->middleware('perm:appDevelop');
+
+        /*
+         * 创建事物统计
+         */
+        Route::post('app/{appId}/thing/{thingId}/statsItem', 'StatsApiController@storeThingStatsItem')
+            ->where('appId', '[1-9][0-9]*')
+            ->where('thingId', '[1-9][0-9]*')
+            ->name('storeThingStatsItem')
+            ->middleware('perm:appDevelop');
+
+        /*
+         * 更新事物统计
+         */
+        Route::put('app/{appId}/thing/{thingId}/statsItem/{statsItemId}', 'StatsApiController@updateThingStatsItem')
+            ->where('appId', '[1-9][0-9]*')
+            ->where('thingId', '[1-9][0-9]*')
+            ->where('statsItemId', '[1-9][0-9]*')
+            ->name('updateThingStatsItem')
+            ->middleware('perm:appDevelop');
+
+        /*
+         * 删除事物统计
+         */
+        Route::delete('app/{appId}/thing/{thingId}/statsItem/{statsItemId}', 'StatsApiController@destroyThingStatsItem')
+            ->where('appId', '[1-9][0-9]*')
+            ->where('thingId', '[1-9][0-9]*')
+            ->where('statsItemId', '[1-9][0-9]*')
+            ->name('destroyThingStatsItem')
+            ->middleware('perm:appDevelop');
     });
 
     /*

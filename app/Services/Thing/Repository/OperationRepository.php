@@ -32,10 +32,10 @@ class OperationRepository extends Repository
      * @param array $fields 返回字段
      * @return mixed
      */
-    public function getOperationsByIds(array $operationIds, array $fields=null)
+    public function getOperationsByIds(array $operationIds, array $fields=[])
     {
         $operations = OperationModel::whereIN('id', $operationIds)
-            ->when(!is_null($fields), function(Builder $query) use ($fields){
+            ->when($fields, function(Builder $query) use ($fields){
                 return $query->select($fields);
             })
             ->get();
@@ -95,8 +95,8 @@ class OperationRepository extends Repository
      * @return bool|array 成功返回新操作，失败返回false
      * @throws Exception
      */
-    public function updateOperation(int $operationId, string $name=null, string $operationType=null,
-                                    string $operationForm=null)
+    public function updateOperation(int $operationId, ?string $name=null, ?string $operationType=null,
+                                    ?string $operationForm=null)
     {
         if(is_null($name) && is_null($operationType) && is_null($operationForm)){
             throw new Exception('更新时所有参数不能都为空！');
@@ -206,7 +206,7 @@ class OperationRepository extends Repository
      * @return bool|array
      * @throws Exception
      */
-    public function updateOperationField(int $operationFieldId, bool $isShow=null, string $updateType=null)
+    public function updateOperationField(int $operationFieldId, ?bool $isShow=null, ?string $updateType=null)
     {
         if(is_null($isShow) && is_null($updateType)){
             throw new Exception('更新参数不能都为空！');

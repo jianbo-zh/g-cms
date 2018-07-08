@@ -25,7 +25,7 @@ class RoleRepository extends Repository
      * @param array|null $fields 返回字段
      * @return array 角色列表
      */
-    public function getPlatformRoles(bool $state=null, array $fields=null)
+    public function getPlatformRoles(?bool $state=null, ?array $fields=null)
     {
         $roles = RoleModel::whereNull('app_id')
             ->when(!is_null($state), function (Builder $query) use ($state){
@@ -96,8 +96,8 @@ class RoleRepository extends Repository
      * @return mixed
      * @throws Exception
      */
-    public function updatePlatformRole($roleId, string $name=null, string $description=null,
-                                       bool $isEnable=null, array $perms=null)
+    public function updatePlatformRole($roleId, ?string $name=null, ?string $description=null,
+                                       ?bool $isEnable=null, ?array $perms=null)
     {
         if(is_null($name) && is_null($description) && is_null($isEnable) && is_null($perms)){
             throw new Exception('更新参数不能都为空！');
@@ -133,8 +133,8 @@ class RoleRepository extends Repository
      * @return mixed
      * @throws Exception
      */
-    public function updateAppRole(int $appId, int $roleId, string $name=null, string $description=null,
-                                  bool $isEnable=null, array $perms=null)
+    public function updateAppRole(int $appId, int $roleId, ?string $name=null, ?string $description=null,
+                                  ?bool $isEnable=null, ?array $perms=null)
     {
         if(is_null($name) && is_null($description) && is_null($isEnable)){
             throw new Exception('更新参数不能都为空！');
@@ -235,7 +235,7 @@ class RoleRepository extends Repository
      * @param int|null $limit 返回数量
      * @return array 用户集
      */
-    public function getUsersBelongToRole(int $roleId, array $fields=null, int $offset=0, int $limit=null)
+    public function getUsersBelongToRole(int $roleId, ?array $fields=null, int $offset=0, ?int $limit=null)
     {
         $role2Users = User2RoleModel::where('role_id', $roleId)->get();
 
@@ -248,7 +248,7 @@ class RoleRepository extends Repository
             return [];
         }
         $users = UserModel::whereIn('id', $userIds)
-            ->when(!empty($fields), function(Builder $query) use ($fields){
+            ->when($fields, function(Builder $query) use ($fields){
                 return $query->select($fields);
             })
             ->when($limit > 0, function (Builder $query) use ($offset, $limit){
@@ -356,10 +356,10 @@ class RoleRepository extends Repository
      * @param int|null $limit 返回数量
      * @return array 应用列表
      */
-    public function getAppRoles(int $appId, array $condition=[], array $fields=null, int $offset=0, int $limit=null)
+    public function getAppRoles(int $appId, ?array $condition=null, ?array $fields=null, int $offset=0, ?int $limit=null)
     {
         $roles = RoleModel::where('app_id', $appId)
-            ->when(!empty($condition), function (Builder $query) use ($condition){
+            ->when($condition, function (Builder $query) use ($condition){
                 if(isset($condition['state'])){
                     $query->where('state', !empty($condition['state']) ? RoleModel::STATE_ENABLE :
                         RoleModel::STATE_DISABLE);
@@ -385,7 +385,7 @@ class RoleRepository extends Repository
      * @param array|null $fields 返回字段
      * @return array|mixed
      */
-    public function getPlatformRolesOfUser(int $userId, array $condition=[], array $fields=null)
+    public function getPlatformRolesOfUser(int $userId, ?array $condition=null, array $fields=null)
     {
         $platformRoles = [];
 
@@ -398,7 +398,7 @@ class RoleRepository extends Repository
 
             $roles = RoleModel::whereIn('id', $userRoleIds)
                 ->whereNull('app_id')
-                ->when(!empty($condition), function (Builder $query) use ($condition){
+                ->when($condition, function (Builder $query) use ($condition){
                     if(isset($condition['state'])){
                         $query->where('state', !empty($condition['state']) ? RoleModel::STATE_ENABLE :
                             RoleModel::STATE_DISABLE);
@@ -424,7 +424,7 @@ class RoleRepository extends Repository
      * @param array|null $fields 返回字段
      * @return array|mixed
      */
-    public function getAppRolesOfUser(int $userId, array $condition=[], array $fields=null)
+    public function getAppRolesOfUser(int $userId, ?array $condition=null, ?array $fields=null)
     {
         $appRoles = [];
         $user2role = User2RoleModel::where('user_id', $userId)->select('role_id')->get();
@@ -436,7 +436,7 @@ class RoleRepository extends Repository
 
             $roles = RoleModel::whereIn('id', $userRoleIds)
                 ->whereNotNull('app_id')
-                ->when(!empty($condition), function (Builder $query) use ($condition){
+                ->when($condition, function (Builder $query) use ($condition){
                     if(isset($condition['state'])){
                         $query->where('state', !empty($condition['state']) ? RoleModel::STATE_ENABLE :
                             RoleModel::STATE_DISABLE);
@@ -464,7 +464,7 @@ class RoleRepository extends Repository
      * @param array|null $fields 返回字段
      * @return array|mixed
      */
-    public function getAppRolesOfAppUser(int $appId, int $userId, array $condition=[], array $fields=null)
+    public function getAppRolesOfAppUser(int $appId, int $userId, ?array $condition=null, array $fields=null)
     {
         $appRoles = [];
         $user2role = User2RoleModel::where('user_id', $userId)->select('role_id')->get();
@@ -476,7 +476,7 @@ class RoleRepository extends Repository
 
             $roles = RoleModel::whereIn('id', $userRoleIds)
                 ->where('app_id', $appId)
-                ->when(!empty($condition), function (Builder $query) use ($condition){
+                ->when($condition, function (Builder $query) use ($condition){
                     if(isset($condition['state'])){
                         $query->where('state', !empty($condition['state']) ? RoleModel::STATE_ENABLE :
                             RoleModel::STATE_DISABLE);
