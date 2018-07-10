@@ -1,5 +1,348 @@
 <?php
 
+if(! function_exists('build_stats_chart_js')){
+    function build_stats_chart_js(string $divId, string $chartType, array $option, array $dataSet)
+    {
+        if(!isset($option['dataset']['source'])){
+            $option['dataset']['source'] = $dataSet;
+        }
+        if(!isset($option['legend']['data'])){
+            $option['legend']['data'] = array_slice($dataSet[0], 1);
+        }
+
+        $seriesNum = count($dataSet[0]) - 1;
+
+        $jsStr = "var myChart{$divId} = echarts.init(document.getElementById('{$divId}'));\r\n";
+        switch ($chartType){
+            case 'basicLine':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'line';
+                    }
+                }
+                break;
+            case 'smoothLine':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'line';
+                    }
+                    if(!isset($option['series'][$i]['smooth'])){
+                        $option['series'][$i]['smooth'] = true;
+                    }
+                }
+                break;
+            case 'basicArea':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['xAxis']['boundaryGap'])){
+                    $option['xAxis']['boundaryGap'] = false;
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'line';
+                    }
+                    if(!isset($option['series'][$i]['areaStyle'])){
+                        $option['series'][$i]['areaStyle'] = (object)[];
+                    }
+                }
+                break;
+            case 'stackedLine':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['xAxis']['boundaryGap'])){
+                    $option['xAxis']['boundaryGap'] = false;
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'line';
+                    }
+                    if(!isset($option['series'][$i]['areaStyle'])){
+                        $option['series'][$i]['areaStyle'] = (object)[];
+                    }
+                }
+                break;
+            case 'stackedArea':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['xAxis']['boundaryGap'])){
+                    $option['xAxis']['boundaryGap'] = false;
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'line';
+                    }
+                    if(!isset($option['series'][$i]['areaStyle'])){
+                        $option['series'][$i]['areaStyle'] = (object)[];
+                    }
+                    if(!isset($option['series'][$i]['stack'])){
+                        $option['series'][$i]['stack'] = '总量';
+                    }
+                }
+                break;
+            case 'basicBar':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'bar';
+                    }
+                }
+                break;
+            case 'basicBarYAxis':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'value';
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'category';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'bar';
+                    }
+                }
+                break;
+            case 'stackedBar':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'category';
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'value';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'bar';
+                    }
+                    if(!isset($option['series'][$i]['stack'])){
+                        $option['series'][$i]['stack'] = '总量';
+                    }
+                }
+                break;
+            case 'stackedBarYAxis':
+                if(!isset($option['xAxis']['type'])){
+                    $option['xAxis']['type'] = 'value';
+                }
+                if(!isset($option['yAxis']['type'])){
+                    $option['yAxis']['type'] = 'category';
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'bar';
+                    }
+                    if(!isset($option['series'][$i]['stack'])){
+                        $option['series'][$i]['stack'] = '总量';
+                    }
+                }
+                break;
+            case 'polarBar':
+                if(!isset($option['angleAxis']['type'])){
+                    $option['angleAxis']['type'] = 'category';
+                }
+                if(!isset($option['radiusAxis'])){
+                    $option['radiusAxis'] = (object)[];
+                }
+                if(!isset($option['polar'])){
+                    $option['polar'] = (object)[];
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'bar';
+                    }
+                    if(!isset($option['series'][$i]['coordinateSystem'])){
+                        $option['series'][$i]['coordinateSystem'] = 'polar';
+                    }
+                    if(!isset($option['series'][$i]['stack'])){
+                        $option['series'][$i]['stack'] = '总量';
+                    }
+                }
+                break;
+            case 'polarStackedBar':
+                if(!isset($option['angleAxis']['type'])){
+                    $option['angleAxis']['type'] = 'category';
+                }
+                if(!isset($option['radiusAxis'])){
+                    $option['radiusAxis'] = (object)[];
+                }
+                if(!isset($option['polar'])){
+                    $option['polar'] = (object)[];
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'bar';
+                    }
+                    if(!isset($option['series'][$i]['coordinateSystem'])){
+                        $option['series'][$i]['coordinateSystem'] = 'polar';
+                    }
+                    if(!isset($option['series'][$i]['stack'])){
+                        $option['series'][$i]['stack'] = '总量';
+                    }
+                }
+                break;
+            case 'basicPie':
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'pie';
+                    }
+                    if(!isset($option['series'][$i]['radius'])){
+                        $option['series'][$i]['radius'] = '55%';
+                    }
+                    if(!isset($option['series'][$i]['center'])){
+                        $option['series'][$i]['center'] = ['45%', '50%'];
+                    }
+                }
+                break;
+            case 'radiusPie':
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'pie';
+                    }
+                    if(!isset($option['series'][$i]['radius'])){
+                        $option['series'][$i]['radius'] = '55%';
+                    }
+                    if(!isset($option['series'][$i]['center'])){
+                        $option['series'][$i]['center'] = ['45%', '50%'];
+                    }
+                    if(!isset($option['series'][$i]['roseType'])){
+                        $option['series'][$i]['roseType'] = 'area';
+                    }
+                }
+                break;
+            case 'basicScatter':
+                if(!isset($option['xAxis'])){
+                    $option['xAxis'] = (object)[];
+                }
+                if(!isset($option['yAxis'])){
+                    $option['yAxis'] = (object)[];
+                }
+                for($i=0; $i<$seriesNum; ++$i){
+                    if(!isset($option['series'])){
+                        $option['series'] = [$i=>[]];
+                    }
+                    if(!isset($option['series'][$i]['name'])){
+                        $option['series'][$i]['name'] = $dataSet[0][$i+1];
+                    }
+                    if(!isset($option['series'][$i]['type'])){
+                        $option['series'][$i]['type'] = 'scatter';
+                    }
+                }
+                break;
+        }
+
+        if(!isset($option['tooltip'])){
+            $option['tooltip'] = (object) [];
+        }
+
+        $jsStr .= "myChart{$divId}.setOption(". json_encode($option) .");";
+
+        return $jsStr;
+    }
+}
+
 if(! function_exists('build_detail_html')){
     function build_detail_html($params, $default=array())
     {

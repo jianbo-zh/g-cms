@@ -22,13 +22,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($stateItems as $state)
+                                @foreach($statsItems as $stats)
                                     <tr>
-                                        <td>{{ $state['name'] }}</td>
+                                        <td>{{ $stats['name'] }}</td>
                                         <td>
-                                            <a href="{{ route('indexThingStateOperations', ['appId'=>$appId, 'thingId'=>$thingId, 'stateId'=>$state['id']]) }}" class="btn btn-success">操作</a>
-                                            <a href="{{ route('editThingState', ['appId'=>$appId, 'thingId'=>$thingId, 'stateId'=>$state['id']]) }}" class="btn btn-primary">编辑</a>
-                                            <button class="btn btn-danger btn-ladda ladda-button destroyThingStateButton" data-style="zoom-out" data-id="{{ $state['id'] }}">刪除</button>
+                                            <a href="{{ route('showThingStatsItem', ['appId'=>$appId, 'thingId'=>$thingId, 'stateItemId'=>$stats['id']]) }}" class="btn btn-success">图表</a>
+                                            <a href="{{ route('editThingStatsItem', ['appId'=>$appId, 'thingId'=>$thingId, 'statsItemId'=>$stats['id']]) }}" class="btn btn-primary">编辑</a>
+                                            <button class="btn btn-danger btn-ladda ladda-button destroyThingStatsButton" data-style="zoom-out" data-id="{{ $stats['id'] }}">刪除</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -49,13 +49,13 @@
     <script>
         $(function(){
 
-            $('.destroyThingStateButton').click(function () {
-                let stateId = $(this).attr('data-id');
+            $('.destroyThingStatsButton').click(function () {
+                let statsItemId = $(this).attr('data-id');
                 let $that = $(this);
                 if(confirm('确认删除该事物？')){
                     let ladda = Ladda.create(this).start();
-                    let turl = '{{ route('destroyThingState', ['appId' => $appId, 'thingId' => $thingId, 'stateId'=>'[stateId]']) }}';
-                    z_ajax('delete', z_bind_url_params(turl, {'[stateId]':stateId}), null, function (response) {
+                    let turl = '{{ route('destroyThingStatsItem', ['appId' => $appId, 'thingId' => $thingId, 'statsItemId'=>'[statsItemId]']) }}';
+                    z_ajax('delete', z_bind_url_params(turl, {'[statsItemId]':statsItemId}), null, function (response) {
                         let data = response.data;
                         if(data.code === 0){
                             z_notify_success(data.message ? data.message : '操作成功！');

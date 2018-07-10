@@ -74,7 +74,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" name="group[0][fieldName]" placeholder="别名" value="" />
+                                                    <input type="text" class="form-control" name="group[0][name]" placeholder="别名" value="" />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <select class="form-control groupType" name="group[0][type]">
@@ -98,7 +98,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" name="group[1][fieldName]" placeholder="别名" value="" />
+                                                    <input type="text" class="form-control" name="group[1][name]" placeholder="别名" value="" />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <select class="form-control groupType" name="group[1][type]">
@@ -227,20 +227,19 @@
                             '        </select>\n' +
                     '    </div>\n' +
                     '    <div class="col-md-3">\n' +
-                    '        <input type="text" class="form-control" name="group['+ count +'][fieldName]" value="" />\n' +
+                    '        <input type="text" class="form-control" name="group['+ count +'][name]" value="" />\n' +
                     '    </div>\n' +
                     '    <div class="col-md-3">\n' +
-                    '        <select class="form-control" name="group['+ count +'][type]">\n' +
-                        @foreach($symbols as $key => $value)
-                            '                <option value="{{ $key }}">{{ $value }}</option>\n' +
+                    '        <select class="form-control groupType" name="group['+ count +'][type]">\n' +
+                    '            <option values=""></option>\n'+
+                        @foreach($groupTypes as $key => $value)
+                            '                <option value="{{ $key }}">{{ $value['name'] }}</option>\n' +
                         @endforeach
                             '        </select>\n' +
                     '    </div>\n' +
                     '    <div class="col-md-3">\n' +
                     '        <select class="form-control" name="group['+ count +'][operation]">\n' +
-                        @foreach($symbols as $key => $value)
-                            '                <option value="{{ $key }}">{{ $value }}</option>\n' +
-                        @endforeach
+                    '            <option values=""></option>\n'+
                             '        </select>\n' +
                     '    </div>\n' +
                     '</div>');
@@ -248,6 +247,9 @@
                 if(count > 1){
                     $('#deleteOneGroup').show();
                 }
+
+                $('.groupType').off('change').on('change', cbGroupTypeChange);
+
                 return false;
             });
 
@@ -330,12 +332,13 @@
                 $('#chartValue').html(options);
             });
 
-            $('.groupType').change(function(){
+            let cbGroupTypeChange = function(event){
+                let $that = $(event.target);
                 let groupTypeMap = JSON.parse('{!! $groupTypeMapJson !!}');
-                let $groupOperation = $(this).parent('div').next('div').find('select.form-control');
+                let $groupOperation = $that.parent('div').next('div').find('select.form-control');
                 let options = '';
 
-                switch ($(this).val()){
+                switch ($that.val()){
                     case 'timeGroup':
                         for( let i = 0; i < groupTypeMap.timeGroup.subs.length; i++){
                             let value = groupTypeMap.timeGroup.subs[i].value,
@@ -362,7 +365,9 @@
                 }
 
                 $groupOperation.html(options);
-            });
+            };
+
+            $('.groupType').on('change', cbGroupTypeChange);
 
             $('#createThingStatsSubmit').click(function(){
                 let ladda = Ladda.create(this).start();

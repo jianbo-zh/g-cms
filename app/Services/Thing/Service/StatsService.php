@@ -21,6 +21,44 @@ class StatsService extends Service
     }
 
     /**
+     * 获取事物统计列表
+     *
+     * @param string $authCode 授权码
+     * @param int $thingId 事物编号
+     * @return mixed
+     */
+    public function getStatsItems(string $authCode, int $thingId)
+    {
+        return $this->statsRepo->getStatsItems($thingId);
+    }
+
+    /**
+     * 获取统计的统计数据
+     *
+     * @param string $authCode 授权码
+     * @param int $statsItemId 统计项编号
+     * @return array 统计数据
+     * @throws \App\Services\_Base\Exception
+     * @throws \Exception
+     */
+    public function getStatsItemData(string $authCode, int $statsItemId)
+    {
+        return $this->statsRepo->getStatsItemData($statsItemId);
+    }
+
+    /**
+     * 获取统计项图表配置
+     *
+     * @param string $authCode 授权码
+     * @param int $statsItemId 统计项编号
+     * @return mixed 图表配置
+     */
+    public function getStatsItemChartConfig(string $authCode, int $statsItemId)
+    {
+        return $this->statsRepo->getStatsItemChartConfig($statsItemId);
+    }
+
+    /**
      * 创建事物统计项
      *
      * @param string $authCode 授权码

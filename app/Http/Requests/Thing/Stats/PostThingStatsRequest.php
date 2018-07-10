@@ -30,12 +30,12 @@ class PostThingStatsRequest extends FormRequest
             'cond.0.value'          => ['nullable', 'max:255'],
 
             'group.0.fieldId'       => ['required', 'numeric'],
-            'group.0.fieldName'     => ['required', 'max:60'],
+            'group.0.name'          => ['required', 'max:60'],
             'group.0.type'          => ['required', 'max:60'],
             'group.0.operation'     => ['required', 'max:60'],
 
             'group.1.fieldId'       => ['required', 'numeric'],
-            'group.1.fieldName'     => ['required', 'max:60'],
+            'group.1.name'     => ['required', 'max:60'],
             'group.1.type'          => ['required', 'max:60'],
             'group.1.operation'     => ['required', 'max:60'],
 
@@ -57,8 +57,8 @@ class PostThingStatsRequest extends FormRequest
 
             'group.0.fieldId.required'      => '请选择维度字段！',
             'group.0.fieldId.numeric'       => '维度字段必须是数字！',
-            'group.0.fieldName.required'    => '请填写维度字段别名！',
-            'group.0.fieldName.max:60'      => '维度字段别名不能超过60个字符！',
+            'group.0.name.required'         => '请填写维度字段别名！',
+            'group.0.name.max:60'           => '维度字段别名不能超过60个字符！',
             'group.0.type.required'         => '请选择维度操作类型！',
             'group.0.type.max:60'           => '操作类型不能超过60个字符！',
             'group.0.operation.required'    => '请选择维度操作！',
@@ -66,8 +66,8 @@ class PostThingStatsRequest extends FormRequest
 
             'group.1.fieldId.required'      => '请选择维度字段！',
             'group.1.fieldId.numeric'       => '维度字段必须是数字！',
-            'group.1.fieldName.required'    => '请填写维度字段别名！',
-            'group.1.fieldName.max:60'      => '维度字段别名不能超过60个字符！',
+            'group.1.name.required'         => '请填写维度字段别名！',
+            'group.1.name.max:60'           => '维度字段别名不能超过60个字符！',
             'group.1.type.required'         => '请选择维度操作类型！',
             'group.1.type.max:60'           => '操作类型不能超过60个字符！',
             'group.1.operation.required'    => '请选择维度操作！',

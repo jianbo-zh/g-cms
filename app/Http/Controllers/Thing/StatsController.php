@@ -57,17 +57,93 @@ class StatsController extends Controller
 
             $this->setOperationContext($appId, $thingId);
 
-            $stateItems = [];
+            $statsItems = $this->statsService->getStatsItems('123', $thingId);
 
             return view('platform.thing.stats.indexThingStatsItems', [
                 'appId' => $appId,
                 'thingId' => $thingId,
-                'stateItems' => $stateItems
+                'statsItems' => $statsItems
             ]);
 
         }catch (\Exception $e){
             return $this->exceptionResponse($e);
         }
+    }
+
+    /**
+     * 查看统计图
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showThingStatsItem()
+    {
+        try{
+            $appId = Route::input('appId');
+            $thingId = Route::input('thingId');
+            $statsItemId = Route::input('statsItemId');
+
+            $this->setOperationContext($appId, $thingId);
+
+            $statsItemData = $this->statsService->getStatsItemData('123', $statsItemId);
+
+            $statsItemChartConfig = $this->statsService->getStatsItemChartConfig('123', $statsItemId);
+
+            $dataSet = $this->buildChartDataSet($statsItemData);
+
+            return view('platform.thing.stats.showThingStatsItem', [
+                'appId' => $appId,
+                'thingId' => $thingId,
+                'dataSet' => $dataSet,
+                'chartType' => $statsItemChartConfig['chart'],
+                'chartOption' => $statsItemChartConfig['option'],
+            ]);
+
+        }catch (\Exception $e){
+            return $this->exceptionResponse($e);
+        }
+    }
+
+    /**
+     * 统计数据转换成图表可识别的格式
+     *
+     * @param array $statsItemData 统计数据
+     * @return array 图表可识别数据
+     * @throws \Exception
+     */
+    private function buildChartDataSet(array $statsItemData)
+    {
+        $columnNum = count($statsItemData[0]);
+        if($columnNum > 3){
+            throw new \Exception('超出范围！');
+
+        }else if($columnNum < 3){
+            return $statsItemData;
+        }
+        $titleHeads = [];
+        $data = [];
+        foreach ($statsItemData as $key => $value){
+            if($key === 0){
+                continue;
+            }
+            if(! in_array($value[1], $titleHeads)){
+                $titleHeads[] = $value[1];
+            }
+            $data[$value[0]][$value[1]] = $value[2];
+        }
+        $newTitleHeads = $titleHeads;
+        array_unshift($newTitleHeads, $statsItemData[0][0]);
+        $dataSet = [
+            $newTitleHeads
+        ];
+        foreach ($data as $group1Name => $group1){
+            $tmp = [$group1Name];
+            foreach ($titleHeads as $group2Name){
+                $tmp[] = isset($group1[$group2Name]) ? $group1[$group2Name] : 0;
+            }
+            $dataSet[] = $tmp;
+        }
+
+        return $dataSet;
     }
 
     /**
@@ -142,9 +218,9 @@ class StatsController extends Controller
 
             $fields = $this->fieldService->getFields('123', $thingId);
 
-            $symbols = $this->statsService->getStateConditionSymbols('123');
+            $symbols = $this->stateService->getStateConditionSymbols('123');
 
-            $state = $this->statsService->getState('123', $stateId);
+            $state = $this->stateService->getState('123', $stateId);
 
             return view('platform.thing.stats.editThingStatsItem', [
                 'appId'     => $appId,

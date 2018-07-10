@@ -324,6 +324,13 @@ Route::middleware('auth')->namespace('Thing')->group(function(){
         ->name('editThingStatsItem')
         ->middleware('perm:appDevelop');
 
+    /*
+     * 事物统计-查看
+     */
+    Route::get('/app/{appId}/thing/{thingId}/statsItem/{statsItemId}/show', 'StatsController@showThingStatsItem')
+        ->name('showThingStatsItem')
+        ->middleware('perm:appDevelop');
+
 
 });
 
